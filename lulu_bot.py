@@ -1,7 +1,6 @@
 import json
 import random
 import os
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 
 
@@ -88,7 +87,6 @@ def answer_handler(bot, update):
         bot.send_message(update.message.from_user.id, text=sweet_text())
 
     if answer == "pic":
-        bot.send_message(update.message.from_user.id, text="pic")
         bot.send_photo(update.message.from_user.id, photo=open(get_pic(), 'rb'), caption=sweet_text())
 
 

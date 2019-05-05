@@ -60,6 +60,15 @@ def generate_uh():
     return uh + "!"
 
 
+def sweet_text_no_empty():
+    text = random.choice(sweet_texts)
+
+    for i in range(0, random.randrange(0, 4)):
+        text += random.choice(emoijs)
+
+    return text
+
+
 def sweet_text():
     text = ""
     if random.randrange(0, 1) == 1:
@@ -84,7 +93,7 @@ def answer_handler(bot, update):
         bot.send_message(update.message.from_user.id, text=generate_uh())
 
     if answer == "sweet":
-        bot.send_message(update.message.from_user.id, text=sweet_text())
+        bot.send_message(update.message.from_user.id, text=sweet_text_no_empty())
 
     if answer == "pic":
         bot.send_photo(update.message.from_user.id, photo=open(get_pic(), 'rb'), caption=sweet_text())

@@ -1,18 +1,24 @@
 import json
 import random
 import os
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    CallbackQueryHandler,
+    MessageHandler,
+    Filters,
+)
 
 
 # create Bot
-with open("token.json","r") as read_file:
+with open("token.json", "r") as read_file:
     TOKEN = json.load(read_file)[0]
 updater = Updater(token=TOKEN)
 dispatcher = updater.dispatcher
 
 
 # define answer weights
-with open("answer_weights.json","r") as read_file:
+with open("answer_weights.json", "r") as read_file:
     weights = json.load(read_file)
 
 # fill answers list
@@ -22,13 +28,12 @@ for answer, weight in weights.items():
         answers.append(answer)
 
 # load sweet text
-with open("sweet_texts.json","r") as read_file:
+with open("sweet_texts.json", "r") as read_file:
     sweet_texts = json.load(read_file)
 
 # load emoijs
-with open("emoijs.json","r") as read_file:
+with open("emoijs.json", "r") as read_file:
     emoijs = json.load(read_file)
-
 
 
 # load pics
@@ -96,7 +101,11 @@ def answer_handler(bot, update):
         bot.send_message(update.message.from_user.id, text=sweet_text_no_empty())
 
     if answer == "pic":
-        bot.send_photo(update.message.from_user.id, photo=open(get_pic(), 'rb'), caption=sweet_text())
+        bot.send_photo(
+            update.message.from_user.id,
+            photo=open(get_pic(), "rb"),
+            caption=sweet_text(),
+        )
 
 
 # register handler for plain messages
